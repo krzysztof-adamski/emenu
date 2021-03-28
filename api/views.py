@@ -9,7 +9,7 @@ from api.models import Meal, Menu
 from api.serializers import MealSerializer, MenuSerializer
 
 
-class MenusList(generics.ListCreateAPIView):
+class MenusBaseView(generics.GenericAPIView):
     queryset = Menu.objects.annotate(
         meals_count=Count("meals"),
         meals_name=Meal.objects.values("name").distinct(),
@@ -30,23 +30,15 @@ class MenusList(generics.ListCreateAPIView):
         return qs.filter(meals_count__gt=0)
 
 
-class MenusDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Menu.objects.annotate(meals_count=Count("meals")).order_by(
-        "name", "meals_count"
-    )
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
-    serializer_class = MenuSerializer
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        if self.request.user.is_authenticated:
-            return qs
-        return qs.filter(meals_count__gt=0)
+class MenusList(MenusBaseView, generics.ListCreateAPIView):
+    pass
 
 
-class MealsList(generics.ListCreateAPIView):
+class MenusDetail(MenusBaseView, generics.RetrieveUpdateDestroyAPIView):
+    pass
+
+
+class MealBaseView(generics.GenericAPIView):
     queryset = Meal.objects.all()
     serializer_class = MealSerializer
     permission_classes = [
@@ -60,9 +52,9 @@ class MealsList(generics.ListCreateAPIView):
         return qs.filter(menu_id=pk)
 
 
-class MealsDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Meal.objects.all()
-    serializer_class = MealSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
+class MealsList(MealBaseView, generics.ListCreateAPIView):
+    pass
+
+
+class MealsDetail(MealBaseView, generics.RetrieveUpdateDestroyAPIView):
+    pass
