@@ -12,11 +12,11 @@ class MealSerializer(serializers.ModelSerializer):
         model = Meal
         fields = "__all__"
 
-    def create(self, validated_data):
-        pk = self.context['view'].kwargs.get("pk")
-        menu = get_object_or_404(Menu, pk=pk)
-        meal = Meal.objects.create(menu=menu, **validated_data)
-        return meal
+    # def create(self, validated_data):
+    #     pk = self.context['view'].kwargs.get("pk")
+    #     menu = get_object_or_404(Menu, pk=pk)
+    #     meal = Meal.objects.create(menu=menu, **validated_data)
+    #     return meal
 
 
 class MenuSerializer(serializers.ModelSerializer):
