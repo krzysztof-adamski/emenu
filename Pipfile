@@ -4,8 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django = "*"
+ipdb = "*"
+factory-boy = "==2.12.0"
+coverage = "*"
+psycopg2-binary = "==2.8.6"
+django-filter = "*"
 
 [dev-packages]
+pre-commit = "*"
 
 [requires]
 python_version = "3.8"
+
+[scripts]
+pep = "pre-commit run --all-files"
+tests = "coverage run manage.py test"
+report = "coverage report -m"
+html = "coverage html"
