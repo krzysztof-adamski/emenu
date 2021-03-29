@@ -19,35 +19,35 @@ export PRINT_HELP_PYSCRIPT
 
 
 init:
-        pipenv shell
+    pipenv shell
 
 clean:
-        @- docker rm $(APP) -f
+    @- docker rm $(APP) -f
 
 help-default:
-        @-python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
+    @-python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 docker-rmi:  ##  Usuwa błedne obrazy dockera
-        @-docker rmi $(IMAGES) -f
+    @-docker rmi $(IMAGES) -f
 
 docker-rmi-all:  ##  Usuwa błedne obrazy dockera
-        @-docker rmi $(IMAGES_ALL) -f
+    @-docker rmi $(IMAGES_ALL) -f
 
 docker-rm:  ##  Usuwa contenery
-        @-docker stop ${DOCKERS}
-        @-docker rm ${DOCKERS} -f
+    @-docker stop ${DOCKERS}
+    @-docker rm ${DOCKERS} -f
 
 docker-volumes-down:  ##  Usuwa volumeny
-        docker-compose down --volumes
+    docker-compose down --volumes
 
 docker-networks-down:  ##  Usuwa netw
-        docker-compose down --networks
+    docker-compose down --networks
 
 start-build:  ##  Start Build
-        @- export COMPOSE_HTTP_TIMEOUT=10 && docker-compose up -d --build --remove-orphans
+    @- export COMPOSE_HTTP_TIMEOUT=10 && docker-compose up -d --build --remove-orphans
 
 start: clean  ##  Start
-        @- export COMPOSE_HTTP_TIMEOUT=100 && docker-compose up -d --remove-orphans
+    @- export COMPOSE_HTTP_TIMEOUT=100 && docker-compose up -d --remove-orphans
 
 stop: clean  ##  Stop
-        @- docker-compose stop
+    @- docker-compose stop
