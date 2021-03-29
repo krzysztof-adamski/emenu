@@ -18,10 +18,20 @@ class MenuManager(models.Manager):
 
 class MealManager(models.Manager):
     def latest_created(self):
-        return self.filter(created__exact=TODAY)
+        return self.get_queryset()\
+            .filter(
+                created__year=TODAY.strftime('%Y'),
+                created__month=TODAY.strftime('%m'),
+                created__day=TODAY.strftime('%d')
+            )
 
     def latest_updated(self):
-        return self.filter(created__exact=YESTERDAY)
+        return self.get_queryset()\
+            .filter(
+                updated__year=TODAY.strftime('%Y'),
+                updated__month=TODAY.strftime('%m'),
+                updated__day=TODAY.strftime('%d')
+            )
 
     def for_subscribers(self):
         return {

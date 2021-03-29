@@ -8,10 +8,12 @@ from api.utils import sendmail
 
 
 class Command(BaseCommand):
-    # def add_arguments(self, parser):
-    #     parser.add_argument("--migrate", action="store_true", dest="migrate")
-
     def handle(self, *args, **options):
         qs = Meal.objects.for_subscribers()
         for user in User.objects.all():
-            import ipdb; ipdb.set_trace()
+            sendmail(
+                "Subkrypcja potraw",
+                qs,
+                user.email,
+                "menu_subscription.html",
+            )

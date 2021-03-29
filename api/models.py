@@ -20,9 +20,6 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        reverse_url = reverse("menus-detail", args=[self.pk])
-        return f"{settings.BASE_URL}{reverse_url}"
 
 class Meal(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)
@@ -43,3 +40,7 @@ class Meal(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        reverse_url = reverse("menus-meal-detail", kwargs={"parent_lookup_menu": self.menu_id, 'pk': self.pk})
+        return f"{settings.BASE_URL}{reverse_url}"

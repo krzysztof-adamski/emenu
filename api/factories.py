@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from factory.fuzzy import FuzzyChoice, FuzzyNaiveDateTime
 from factory.fuzzy import FuzzyText
 
-from .models import Menu, Meal
+from api.models import Menu, Meal
 
 
 class MenuFactory(factory.DjangoModelFactory):

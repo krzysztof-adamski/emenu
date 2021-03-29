@@ -1,0 +1,38 @@
+<table style="background: #f1f1f1; padding:50px 0; width:100%;">
+    <tbody>
+        <tr>
+            <td>
+                <table style="font-size:16px; padding:5px 0 10px; font-family:'Open Sans',sans-serif; width:840px; margin:0 auto; background: #ffffff;border-radius: 4px; box-shadow: 0 0 15px 0 #d2d2d2;">
+                    <tbody>
+                        <tr>
+                            <th colspan="3" style="border-bottom:1px solid #f1f1f1;padding:18px 0;text-align:center">
+                                <img style="height:150px;display:inline-block" src="https://image.freepik.com/darmowe-wektory/szablon-projektu-logo-pizzy_15146-191.jpg" alt="Menu" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding:0 40px;">
+                                <h2>Najnowsze dania</h2>
+
+                                <p style="margin:33px 0 22px; line-height:25px;">
+                                {% for meal in latest_created %}
+                                    <a href="{{ meal.get_absolute_url }}">{{ meal.name }}</a><br/>
+                                {% endfor %}
+                                </p>
+
+                                <h2>Ostatnio zmienione dania</h2>
+
+                                <p style="margin:33px 0 22px; line-height:25px;">
+                                {% for meal in latest_updated %}
+                                    <a href="{{ meal.get_absolute_url }}">{{ meal.name }}</a><br/>
+                                {% endfor %}
+                                </p>
+
+                                <p style="margin:25px 0">Smacznego</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

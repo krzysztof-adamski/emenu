@@ -9,22 +9,18 @@ from django.template.loader import render_to_string
 logger = logging.getLogger(__name__)
 
 
-def sendmail(title, text, to_email, email_template=None):
-    if email_template:
-        context = {"text": text}
-        html_text = render_to_string(email_template, context)
-    else:
-        html_text = None
-
+def sendmail(title, body, to_email, email_template=None):
+    context = body
+    html_text = render_to_string(email_template, context)
     try:
         email = EmailMultiAlternatives(
             subject=title,
-            body=text,
+            body="",
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[to_email],
         )
-        if html_text:
-            email.attach_alternative(html_text, "text/html")
+        email.attach_alternative(html_text, "text/html")
+        #import ipdb;        ipdb.set_trace()
         email.send(fail_silently=False)
     except SMTPException:
         logger.exception("There was an error sending an email")
