@@ -11,6 +11,8 @@ services:
             - .env
         expose:
             - 5001
+        ports:
+            - "5001:5001"
         command: >
            bash -c "python manage.py collectstatic --no-input &&
                     python manage.py migrate &&
