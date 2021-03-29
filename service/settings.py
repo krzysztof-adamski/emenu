@@ -160,7 +160,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "password")  # nosec
 
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
-PORT = os.getenv("PORT", 5000)
+PORT = os.getenv("PORT", 5001)
 SCHEME = os.getenv("SCHEME", "http")
 BASE_URL = (
     f"{SCHEME}://{DOMAIN}:{PORT}"

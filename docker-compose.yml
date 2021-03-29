@@ -1,13 +1,6 @@
 version: '3.7'
 
 services:
-    adminer:
-        container_name: adminer
-        image: adminer
-        restart: on-failure
-        ports:
-            - 8080:8080
-
     emenu:
         container_name: emenu
         image: emenu:latest
@@ -17,31 +10,19 @@ services:
         env_file:
             - .env
         expose:
-            - 5000
+            - 5001
         command: >
            bash -c "python manage.py collectstatic --no-input &&
                     python manage.py migrate &&
-                    gunicorn service.wsgi:application  --name shortener --workers 2 --bind=0.0.0.0:5000 --capture-output --access-logfile - -t 300"
-        depends_on:
-            - "db"
+                    gunicorn service.wsgi:application  --name shortener --workers 2 --bind=0.0.0.0:5001 --capture-output --access-logfile - -t 300"
         volumes:
             - ./static:/static
 
-    db:
-        container_name: db
-        image: postgres:11.5-alpine
-        ports:
-            - 5432:5432
-        env_file:
-            - .env
-        volumes:
-            - postgres_data:/var/lib/postgresql/data/
-
-    nginx:
-        container_name: nginx
+    nginx_emenu:
+        container_name: nginx_emenu
         build: ./nginx
         ports:
-            - 5000:80
+            - 5001:80
         volumes:
             - ./static:/static
         depends_on:
