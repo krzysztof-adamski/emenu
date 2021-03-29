@@ -17,7 +17,5 @@ services:
                     gunicorn service.wsgi:application  --name emenu --workers 2 --bind=0.0.0.0:5001 --capture-output --access-logfile - -t 300"
         volumes:
             - ./static:/static
-
 volumes:
-    postgres_data:
     static: {}
