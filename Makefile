@@ -5,7 +5,7 @@ SHELL := /bin/bash
 DOCKERS := $$(docker ps -a -q)
 IMAGES := $$(docker images -f "dangling=true" -q)
 IMAGES_ALL := $$(docker images)
-APP := shortener
+APP := emenu
 
 define PRINT_HELP_PYSCRIPT
 import re, sys
