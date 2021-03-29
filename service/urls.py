@@ -9,7 +9,7 @@ from api.views import MenusListViewSet, MealsListViewSet
 router = ExtendedDefaultRouter()
 (
     router.register(r'menus', MenusListViewSet, basename='menu')
-        .register(r'meals', MealsListViewSet, basename='menus-meal', parents_query_lookups=['menu_id'])
+        .register(r'meals', MealsListViewSet, basename='menus-meal', parents_query_lookups=['menu'])
 )
 
 urlpatterns = [
