@@ -135,13 +135,13 @@ REST_FRAMEWORK = {
     ],
 }
 
-DEFAULT_FROM_EMAIL = "testowanie12345k@gmail.com"
+DEFAULT_FROM_EMAIL = "susbcribstion@sub.pl"
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "testowanie12345k@gmail.com"
-EMAIL_HOST_PASSWORD = "12345!@#$%"  # nosec
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "user")  # nosec
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "password")  # nosec
 
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
