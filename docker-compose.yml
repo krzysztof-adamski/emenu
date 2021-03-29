@@ -18,16 +18,6 @@ services:
         volumes:
             - ./static:/static
 
-    nginx_emenu:
-        container_name: nginx_emenu
-        build: ./nginx
-        ports:
-            - 5001:80
-        volumes:
-            - ./static:/static
-        depends_on:
-            - emenu
-
 volumes:
     postgres_data:
     static: {}
