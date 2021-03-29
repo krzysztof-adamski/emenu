@@ -284,7 +284,7 @@ class MealsAcceptanceTests(TestCase):
         response = self.client.post(url, data)
 
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()['menu'], Meal.objects.last().id)
+        self.assertEqual(response.json()['menu'], menu.id)
         self.assertEqual(response.json()['name'], meal_name)
 
     def test_create_meal_without_auth_403(self):
