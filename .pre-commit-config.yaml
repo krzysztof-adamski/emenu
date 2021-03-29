@@ -25,8 +25,8 @@ repos:
       - id: black
         language_version: python3
         args: [
-#            --check,
-#            --diff,
+            --check,
+            --diff,
             --line-length=79,
         ]
 
@@ -35,6 +35,6 @@ repos:
     hooks:
       - id: isort
         args: [
-#           --check-only,
-#           --diff
+           --check-only,
+           --diff
         ]

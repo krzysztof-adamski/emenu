@@ -14,7 +14,7 @@ services:
         command: >
            bash -c "python manage.py collectstatic --no-input &&
                     python manage.py migrate &&
-                    gunicorn service.wsgi:application  --name shortener --workers 2 --bind=0.0.0.0:5001 --capture-output --access-logfile - -t 300"
+                    gunicorn service.wsgi:application  --name emenu --workers 2 --bind=0.0.0.0:5001 --capture-output --access-logfile - -t 300"
         volumes:
             - ./static:/static
 
