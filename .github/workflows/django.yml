@@ -1,0 +1,57 @@
+name: Application CI/CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Test Stage
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 2
+      matrix:
+        python-version: [3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv install -d
+    - name: Run Tests
+      run: |
+        pipenv run tests
+  deploy:
+    name: Deploy Stage
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy app to DigitalOcean
+      if: always()
+      uses: appleboy/ssh-action@v0.1.2
+      with:
+        host: ${{secrets.DIGITALOCEAN_HOST}}
+        key: ${{secrets.DIGITALOCEAN_KEY}}
+        username: ${{secrets.DIGITALOCEAN_USER}}
+
+        script: |
+          cd /root/apps
+          cd emenu
+          git checkout .
+          git fetch
+          git checkout master
+          git pull origin master
+          make stop
+          make start-build
+          echo 'Application Updated Successfull'
+
+
