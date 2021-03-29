@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(" ")
 
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
+    "rest_framework_swagger",
+    "drf_spectacular",
     "api",
 ]
 
@@ -145,6 +147,7 @@ REST_FRAMEWORK = {
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
     ],

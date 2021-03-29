@@ -11,6 +11,7 @@ coverage = "*"
 psycopg2-binary = "==2.8.6"
 django-filter = "*"
 drf-extensions = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 pre-commit = "*"

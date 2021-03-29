@@ -1,3 +1,5 @@
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from drf_spectacular.types import OpenApiTypes
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, permissions
 from rest_framework.generics import get_object_or_404
@@ -35,3 +37,15 @@ class MealsListViewSet(NestedViewSetMixin, ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
     ]
+
+    # def initialize_request(self, request, *args, **kwargs):
+    #     """
+    #     Inject user from url in request.data
+    #     """
+    #     request = super(MealsListViewSet, self).initialize_request(
+    #         request, *args, **kwargs
+    #     )
+    #     if request.data:
+    #         request.data["menu"] = kwargs["parent_lookup_menu"]
+    #
+    #     return request
