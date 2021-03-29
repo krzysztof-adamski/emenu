@@ -11,22 +11,23 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "np0ow=3n3o&4^n2-4ccpyx_vc*x=ca6r#mkj%k6=rikj1k%#m!"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(" ")
 
 
 # Application definition
@@ -77,13 +78,26 @@ WSGI_APPLICATION = "service.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get(
+            "SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")
+        ),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
+TEST_DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db_test.sqlite3",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -145,10 +159,24 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "password")  # nosec
 
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
-PORT = os.getenv("PORT", 8000)
+PORT = os.getenv("PORT", 5000)
 SCHEME = os.getenv("SCHEME", "http")
 BASE_URL = (
     f"{SCHEME}://{DOMAIN}:{PORT}"
     if int(PORT) != 80
     else f"{SCHEME}://{DOMAIN}"
 )
+
+if "test" in sys.argv:
+    SECRET_KEY = "test"
+    DATABASES = TEST_DATABASES
+
+
+
+try:
+    from local_settings import *  # noqa
+
+    if "apply_settings" in globals():
+        apply_settings(globals())  # noqa F405
+except (ImportError, NameError):
+    pass
