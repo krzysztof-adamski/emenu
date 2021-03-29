@@ -150,14 +150,13 @@ REST_FRAMEWORK = {
     ],
 }
 
-DEFAULT_FROM_EMAIL = "susbcribstion@sub.pl"
-
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "potrawy@sub.pl")
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "user")  # nosec
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "password")  # nosec
-
+SUBJECT_SUBSCRIBTIONS = "Najnowsze potrawy i ostatnio zmienione"
 
 DOMAIN = os.getenv("DOMAIN", "localhost")
 PORT = os.getenv("PORT", 5001)
@@ -171,8 +170,6 @@ BASE_URL = (
 if "test" in sys.argv:
     SECRET_KEY = "test"
     DATABASES = TEST_DATABASES
-
-
 
 try:
     from local_settings import *  # noqa

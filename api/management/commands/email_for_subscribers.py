@@ -12,7 +12,7 @@ class Command(BaseCommand):
         qs = Meal.objects.for_subscribers()
         for user in User.objects.all():
             sendmail(
-                "Subkrypcja potraw",
+                settings.SUBJECT_SUBSCRIBTIONS,
                 qs,
                 user.email,
                 "menu_subscription.html",
