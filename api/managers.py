@@ -12,7 +12,7 @@ class MenuManager(models.Manager):
     def with_count_meals(self):
         return self.annotate(
             meals_count=Count("meals"),
-            meals_name=self.values("name").distinct(),
+            # meals_name=self.values("name").distinct(),
         ).order_by("name", "meals_count")
 
 

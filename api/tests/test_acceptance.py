@@ -63,7 +63,7 @@ class MenusAcceptanceTests(TestCase):
         self.assertEqual(len(response.json()[0]['meals']), self.menu_one.meals.count())
         self.assertEqual(len(response.json()[1]['meals']), self.menu_two.meals.count())
 
-    def test_return_list_menus_ordering_by_name_meals(self):
+    def test_return_list_menus_ordering_by_name_mealsAZ(self):
         """Test sprawdza czy wyswietlamy listę menu alfabtycznie A-Z po nazwie dań."""
         self.menu_one = MenuFactory.create(name="Menu One")
         MealFactory.create(menu=self.menu_one, name="Burak")
@@ -71,14 +71,14 @@ class MenusAcceptanceTests(TestCase):
         MealFactory.create(menu=self.menu_two, name="Ananas")
 
         url = reverse("menu-list")
-        response = self.client.get(url, {"ordering": "meals_name"})
+        response = self.client.get(url, {"ordering": "meals"})
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Menu.objects.count(), 2)
         self.assertEqual(len(response.json()[1]['meals']), self.menu_one.meals.count())
         self.assertEqual(len(response.json()[0]['meals']), self.menu_two.meals.count())
 
-    def test_return_list_menus_ordering_by_name_meals(self):
+    def test_return_list_menus_ordering_by_name_mealsZA(self):
         """Test sprawdza czy wyswietlamy listę menu alfabtycznie Z-A po nazwie dań."""
         self.menu_one = MenuFactory.create(name="Menu One")
         MealFactory.create(menu=self.menu_one, name="Burak")
@@ -86,7 +86,7 @@ class MenusAcceptanceTests(TestCase):
         MealFactory.create(menu=self.menu_two, name="Ananas")
 
         url = reverse("menu-list")
-        response = self.client.get(url, {"ordering": "-meals_name"})
+        response = self.client.get(url, {"ordering": "-meals"})
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Menu.objects.count(), 2)
