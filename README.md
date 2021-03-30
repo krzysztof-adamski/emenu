@@ -58,6 +58,9 @@ http://localhost:5001/api/schema/redoc/
 
 # Demo
 
+### Użytkownik testowy dla obsługi akcji wymagających autoryzacji: `login: user, password: pass`
+
+
 ```
 http://emenu.adamski.work/api/  <-  api  menus
 http://emenu.adamski.work/api/schema/  <- do pobrania
