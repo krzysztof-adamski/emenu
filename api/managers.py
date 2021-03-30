@@ -12,26 +12,23 @@ class MenuManager(models.Manager):
     def with_count_meals(self):
         return self.annotate(
             meals_count=Count("meals"),
-            # meals_name=self.values("name").distinct(),
         ).order_by("name", "meals_count")
 
 
 class MealManager(models.Manager):
     def latest_created(self):
-        return self.get_queryset()\
-            .filter(
-                created__year=TODAY.strftime('%Y'),
-                created__month=TODAY.strftime('%m'),
-                created__day=TODAY.strftime('%d')
-            )
+        return self.get_queryset().filter(
+            created__year=TODAY.strftime("%Y"),
+            created__month=TODAY.strftime("%m"),
+            created__day=TODAY.strftime("%d"),
+        )
 
     def latest_updated(self):
-        return self.get_queryset()\
-            .filter(
-                updated__year=TODAY.strftime('%Y'),
-                updated__month=TODAY.strftime('%m'),
-                updated__day=TODAY.strftime('%d')
-            )
+        return self.get_queryset().filter(
+            updated__year=TODAY.strftime("%Y"),
+            updated__month=TODAY.strftime("%m"),
+            updated__day=TODAY.strftime("%d"),
+        )
 
     def for_subscribers(self):
         return {

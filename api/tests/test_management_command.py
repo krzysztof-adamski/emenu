@@ -1,16 +1,12 @@
-from django.conf import settings
 import datetime
 from datetime import timedelta
+
+from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.test import TestCase
 
-from api.factories import (
-    MealFactory,
-    MenuFactory,
-    UserFactory,
-)
-from api.models import Menu, Meal
-from django.contrib.auth.models import User
+from api.factories import MealFactory, MenuFactory, UserFactory
+from api.models import Meal, Menu
 
 NOW = datetime.datetime.now()
 YESTERDAY = NOW - timedelta(days=1)

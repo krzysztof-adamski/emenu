@@ -10,4 +10,4 @@ class MenuFilter(filters.FilterSet):
 
     class Meta:
         model = Menu
-        fields = ['created', 'updated', 'name']
+        fields = ["created", "updated", "name"]

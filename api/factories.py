@@ -1,17 +1,17 @@
 import datetime
 
-import factory
 from django.contrib.auth.models import User
-from factory.fuzzy import FuzzyChoice, FuzzyNaiveDateTime
-from factory.fuzzy import FuzzyText
 
-from api.models import Menu, Meal
+import factory
+from factory.fuzzy import FuzzyChoice, FuzzyNaiveDateTime, FuzzyText
+
+from api.models import Meal, Menu
 
 
 class MenuFactory(factory.DjangoModelFactory):
     """Faktoria do obiektu Menu."""
+
     name = factory.Faker("name")
-    # description = factory.Faker("text")
     description = FuzzyText()
     created = FuzzyNaiveDateTime(datetime.datetime.now())
     updated = FuzzyNaiveDateTime(datetime.datetime.now())
@@ -22,6 +22,7 @@ class MenuFactory(factory.DjangoModelFactory):
 
 class MealFactory(factory.DjangoModelFactory):
     """Faktoria do obiektu Meal."""
+
     name = factory.Faker("name")
     description = FuzzyText()
     price = factory.Sequence(lambda n: n)

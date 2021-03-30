@@ -1,8 +1,6 @@
-from django.conf import settings
 from django.test import TestCase
 
-from api.models import Menu, Meal
-from api.factories import MenuFactory, MealFactory
+from api.factories import MealFactory, MenuFactory
 
 
 class MenuModelTests(TestCase):

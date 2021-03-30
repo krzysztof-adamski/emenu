@@ -1,4 +1,5 @@
 import random
+
 from django.db import migrations
 
 MENU_DATA = [
@@ -16,16 +17,15 @@ MENU_DATA = [
     ),
 ]
 
+
 def forwards_func(apps, schema_editor):
     Menu = apps.get_model("api", "Menu")
     db_alias = schema_editor.connection.alias
     [
         Menu.objects.using(db_alias).create(**data)
         for data in [
-            {
-                "name": name,
-                "description": description
-            } for name, description in MENU_DATA
+            {"name": name, "description": description}
+            for name, description in MENU_DATA
         ]
     ]
 

@@ -1,9 +1,8 @@
 from django.conf import settings
-from django.core.management import BaseCommand
-from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
+from django.core.management import BaseCommand
 
-from api.models import Menu, Meal
+from api.models import Meal
 from api.utils import sendmail
 
 

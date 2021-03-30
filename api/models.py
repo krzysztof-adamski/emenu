@@ -1,7 +1,8 @@
-from django.db import models
 from django.conf import settings
-from api.managers import MenuManager, MealManager
+from django.db import models
 from django.urls import reverse
+
+from api.managers import MealManager, MenuManager
 
 
 class Menu(models.Model):
@@ -42,5 +43,8 @@ class Meal(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        reverse_url = reverse("menus-meal-detail", kwargs={"parent_lookup_menu": self.menu_id, 'pk': self.pk})
+        reverse_url = reverse(
+            "menus-meal-detail",
+            kwargs={"parent_lookup_menu": self.menu_id, "pk": self.pk},
+        )
         return f"{settings.BASE_URL}{reverse_url}"
