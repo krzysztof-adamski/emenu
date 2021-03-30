@@ -1,6 +1,20 @@
 version: '3.7'
 
 services:
+    db:
+        container_name: db
+        image: postgres:latest
+        restart: on-failure
+        ports:
+            - "5431:5431"
+        env_file:
+            - .env
+        environment:
+            - PG_TRUST_LOCALNET=true
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+
     emenu:
         container_name: emenu
         image: emenu:latest
@@ -9,8 +23,6 @@ services:
             dockerfile: .Dockerfile
         env_file:
             - .env
-        expose:
-            - 5001
         ports:
             - "5001:5001"
         command: >
@@ -34,3 +46,4 @@ services:
 
 volumes:
     static: {}
+    postgres-data: {}
