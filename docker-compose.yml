@@ -14,10 +14,23 @@ services:
         ports:
             - "5001:5001"
         command: >
-           bash -c "python manage.py collectstatic --no-input &&
+            bash -c "python manage.py collectstatic --no-input &&
                     python manage.py migrate &&
                     gunicorn service.wsgi:application  --name emenu --workers 2 --bind=0.0.0.0:5001 --capture-output --access-logfile - -t 300"
+        labels:
+            deck-chores.mailing.command: sh -c "python manage.py email_for_subscribers"
+            deck-chores.mailing.cron: "0 */10 * * *"
         volumes:
             - ./static:/static
+
+    deck-chores:
+        container_name: deck-chores
+        image: funkyfuture/deck-chores:1
+        restart: unless-stopped
+        environment:
+            TIMEZONE: Europe/Warsaw
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
 volumes:
     static: {}

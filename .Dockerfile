@@ -23,3 +23,5 @@ RUN pip install -r requirements.txt
 COPY . /opt/service
 
 RUN rm -f /opt/service/local_settings.py
+
+RUN pip install deck-chores
