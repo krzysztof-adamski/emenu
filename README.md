@@ -8,9 +8,14 @@ Aplikacja prezentuje `posiłki` zawarte w `menu`
 * możliwość dodawnia `posiłku` do `menu`
 * edycja, usuwanie `menu` i `posiłku` tylko dla zalogowanego użytkownika
 * cykliczne powiadamianie użytkowników o nowych posiłkach i ostatnio zmodyfikowanych: każdego dnia o godz. 10:00
+* sortowanie listy po nazwie oraz liczbie dań, za pomocą parametrów GET: `?ordering=-meals_count` lub `?ordering=meals_count` lub `?ordering=meals`
+* filtrowanie listy po nazwie menu : `?name=Nazwa_dania` możliwe wybrane frazy z nazwy : `Menu smaczne` `?name=smaczne` lub fragmenty słów
+* filtrowanie po dacie aktualizacji `menu` : `?updated=2021-03-30`
+* filtrowanie po dacie utworzenia `menu` : `?created=2021-03-29`
+  
 * obługa aplikacji przy wykorzystaniu API Rest Level 3
 * uruchomienie aplikacji w środowisku `docker`, z bazą danych `postgres`,
-* dokumentacja api z wykożystaniem `swagger` i `redoc`
+* dokumentacja api z wykorzystaniem `swagger` i `redoc`
 * pokrycie kodu testami na poziomie `98%`
 
 ## Instalacja i uruchomienie
