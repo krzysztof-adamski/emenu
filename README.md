@@ -12,7 +12,7 @@ Aplikacja prezentuje `posiłki` zawarte w `menu`
 * filtrowanie listy po nazwie menu : `?name=Nazwa_dania` możliwe wybrane frazy z nazwy : `Menu smaczne` `?name=smaczne` lub fragmenty słów
 * filtrowanie po dacie aktualizacji `menu` : `?updated=2021-03-30`
 * filtrowanie po dacie utworzenia `menu` : `?created=2021-03-29`
-  
+* dodane przykładowane dane wraz z uruchomieniem migracji w aplikacji 
 * obługa aplikacji przy wykorzystaniu API Rest Level 3
 * uruchomienie aplikacji w środowisku `docker`, z bazą danych `postgres`,
 * dokumentacja api z wykorzystaniem `swagger` i `redoc`
