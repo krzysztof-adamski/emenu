@@ -44,7 +44,7 @@ docker-networks-down:  ##  Usuwa netw
 	docker-compose down --networks
 
 start-build:  ##  Start Build
-	@- export COMPOSE_HTTP_TIMEOUT=10 && docker-compose up -d --build --remove-orphans
+	@- export COMPOSE_HTTP_TIMEOUT=100 && docker-compose up -d --build --remove-orphans
 
 start: clean  ##  Start
 	@- export COMPOSE_HTTP_TIMEOUT=100 && docker-compose up -d --remove-orphans
